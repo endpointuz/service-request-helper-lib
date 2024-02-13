@@ -21,7 +21,7 @@ class JsonDecamelizeResponseFormatter(JsonResponseFormatter):
         return humps.decamelize(super().format(request))
 
 
-class FileResponseFormatter(AbstractResponseFormatter):
+class ContentResponseFormatter(AbstractResponseFormatter):
 
     def format(self, request):
         return request.content

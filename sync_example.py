@@ -1,7 +1,7 @@
 from servic_request_helper.request_formatters import CamelizeRequestFormatter
 from servic_request_helper.syncs.auth import AuthByServiceHeaderManager
 from servic_request_helper.syncs.clients import RequestHelper
-from servic_request_helper.syncs.response_formatters import JsonDecamelizeResponseFormatter, FileResponseFormatter
+from servic_request_helper.syncs.response_formatters import JsonDecamelizeResponseFormatter, ContentResponseFormatter
 from servic_request_helper.utils import MethodWrapper
 
 HOST = 'https://api.startpoint.uz'
@@ -32,7 +32,7 @@ print('first name:',  my_profile['first_name'])
 
 photo = startpoint_api.get(
     '/api/v1/public-file/public/' + my_profile['profile_photo']['path'],
-    response_formatter=FileResponseFormatter(),
+    response_formatter=ContentResponseFormatter(),
 )
 
 print(photo[:100])
