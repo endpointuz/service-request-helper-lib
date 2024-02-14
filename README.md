@@ -132,19 +132,16 @@ which contains the string representation of token expiry date and time. Default 
 from the response body, to the python datetime object. Default value is datetime.fromisoformat.
 
 
-Request header managers
-=======
-Aa
-
-
 Making HTTP requests
 =======
 All HTTP requests are made through the corresponding methods of the MethodWrapper instance. Each method has
 the same set of positional and keyword arguments as its input:
 
+
 Positional arguments
 -----
 - uri - Bb
+
 
 Keyword arguments
 -----
