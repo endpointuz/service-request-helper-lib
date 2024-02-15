@@ -18,17 +18,8 @@ service-request-helper @ git+https://github.com/endpointuz/service-request-helpe
 
 Basic usage
 ==========
-All HTTP methods are exposed via the MethodWrapper instance methods:
-- GET - .get()
-- POST - .post()
-- PUT - .put()
-- PATCH - .patch()
-- DELETE - .delete()
-- HEAD - .head()
-
-MethodWrapper constructor accepts RequestHelper (see the "RequestHelper class" section) instance as its one and only argument,
-which contains shared properties for all http requests that will be made with the given MethodWrapper instance.
-Depending on the execution context (sync or async), some import statements will differ:
+Depending on the execution context (sync or async), some import statements will differ. For async requests,
+the response must also be awaited:
 
 Sync
 ------
@@ -58,8 +49,24 @@ async def main():
     response = await api.get('/example')
 ```
 
+Classes such as RequestHelper are doubled in _.syncs_ and _.asyncs_ subpackages. Such classes will be marked with
+(sync/async) note in this documentation. They have the same name, same constructor
+arguments and serve the same purpose. The only difference is in the execution context (sync or async).
 
-RequestHelper class
+All HTTP methods are exposed via the MethodWrapper instance methods:
+- GET - .get
+- POST - .post
+- PUT - .put
+- PATCH - .patch
+- DELETE - .delete
+- HEAD - .head
+
+MethodWrapper constructor accepts RequestHelper (see the "RequestHelper class" section) instance as its one and
+only argument, which contains shared properties for all http requests that will be made with the 
+given MethodWrapper instance.
+
+
+RequestHelper class (sync/async)
 =====
 RequestHelper class contains settings that will be applied to each http request that will be made 
 with the corresponding MethodWrapper instance. Depending on the context (sync or async), RequestHelper can be imported
@@ -96,9 +103,8 @@ headers retrieved from header managers passed to corresponding RequestHelper ins
 
 Passing Authorization to http request
 ==========
-Authorization is set via AuthByServiceHeaderManager request header manager instance, which is passed to 
-RequestHelper constructor as a member of the _request_header_managers_ list or tuple. Same as the RequestHelper, 
-AuthByServiceHeaderManager can be imported from .syncs or .asyncs subpackage depending on the execution context.
+Authorization is set via AuthByServiceHeaderManager (sync/async) request header manager instance, which is passed to 
+RequestHelper constructor as a member of the _request_header_managers_ list or tuple.
 
 ```python
 from servic_request_helper.syncs.auth import AuthByServiceHeaderManager
@@ -154,11 +160,11 @@ Request formatters
 Aa
 
 
-Response formatters
+Response formatters (sync/async)
 =======
 Aa
 
 
-Response error builder
+Response error builder (sync/async)
 =======
 Aa
