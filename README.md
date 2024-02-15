@@ -174,6 +174,10 @@ Request formatters
 Request formatters are used to modify request query params or body before the request is sent. Each request formatter 
 must inherit from AbstractRequestFormatter and implement _.format_ method, which accepts dict and must return dict.
 
+Library provides the following request formatters:
+- **DefaultRequestFormatter()** - Does not perform formatting on the data
+- **CamelizeRequestFormatter()** - Transforms dict keys of the data to be formatted to camelCase
+
 
 Response formatters (sync/async)
 =======
@@ -182,6 +186,12 @@ it is returned to client. Each response formatter must inherit from AbstractResp
 and implement _.format_ method, which accepts response object and must return processed response body.
 
 Async response object's methods must be awaited before they are returned to client.
+
+Library provides the following response formatters for sync and async:
+- **FullResponseFormatter()** - Does not perform formatting on the response, response object will be passed to client
+- **JsonResponseFormatter()** - Retrieves json body of the response without modifying it
+- **JsonDecamelizeResponseFormatter()** - Retrieves json body of the response with keys formatted to snake_notation
+- **ContentResponseFormatter()** - Retrieves the file content of the response
 
 
 Response error builder (sync/async)
@@ -192,3 +202,6 @@ _build_error_ method, which accepts url, request method and response object, and
 module. 
 
 Async response object's methods must be awaited before they are returned to client.
+
+Library provides the following response error builders for sync and async:
+- **ResponseStatusErrorBuilder()** - Handles most common response status codes for unsuccessful requests
