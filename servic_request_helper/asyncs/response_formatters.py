@@ -1,6 +1,7 @@
 import humps
 
 from servic_request_helper.abstracts import AbstractResponseFormatter
+from servic_request_helper.types import ResponseFile
 
 
 class FullResponseFormatter(AbstractResponseFormatter):
@@ -25,3 +26,9 @@ class ContentResponseFormatter(AbstractResponseFormatter):
 
     async def format(self, response):
         return await response.read()
+
+
+class FileResponseFormatter(AbstractResponseFormatter):
+
+    async def format(self, response):
+        return ResponseFile(await response.read(), response.headers)
