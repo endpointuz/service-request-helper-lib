@@ -1,4 +1,5 @@
 import re
+from email import message_from_bytes
 
 from servic_request_helper import http_methods
 
@@ -14,10 +15,21 @@ def build_url(host, uri):
 
 
 def get_filename_from_content_disposition_header(header_value: str):
+    if not header_value:
+        return None
+
     match = re.search(r'filename=([^\s]+)', header_value)
     if match:
         return match.group(1)
-    return None
+
+
+def parse_content_type_header(header_value: str):
+    if not header_value:
+        return None, None
+
+    header_string = f"Content-Type: {header_value}"
+    msg = message_from_bytes(header_string.encode("utf-8"))
+    return msg.get_content_maintype(), msg.get_content_subtype()
 
 
 class MethodWrapper:
