@@ -5,8 +5,8 @@ from servic_request_helper.syncs.response_formatters import JsonDecamelizeRespon
 from servic_request_helper.utils import MethodWrapper
 
 HOST = 'https://api.startpoint.uz'
-USERNAME = 'sarvar'
-PASSWORD = 'sarvar'
+USERNAME = '***'
+PASSWORD = '***'
 
 auth_manager = AuthByServiceHeaderManager(
     host=HOST,
@@ -26,6 +26,8 @@ startpoint_api = MethodWrapper(RequestHelper(
 
 my_profile = startpoint_api.get('/api/v1/account/user/me')
 
+print('username:',  my_profile['username'])
+print('first name:',  my_profile['first_name'])
 
 
 photo = startpoint_api.get(
@@ -33,5 +35,4 @@ photo = startpoint_api.get(
     response_formatter=ContentResponseFormatter(),
 )
 
-print(type(photo))
-print(len(photo))
+print(photo[:100])

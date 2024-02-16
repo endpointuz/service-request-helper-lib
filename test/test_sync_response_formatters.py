@@ -1,6 +1,6 @@
 import os
 import unittest
-from unittest.mock import patch, Mock
+from unittest.mock import Mock
 
 from servic_request_helper.syncs import response_formatters as formatters
 from servic_request_helper.types import ResponseFile
