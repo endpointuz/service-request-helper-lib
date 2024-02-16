@@ -5,24 +5,23 @@ from servic_request_helper.abstracts import AbstractResponseFormatter
 
 class FullResponseFormatter(AbstractResponseFormatter):
 
-    async def format(self, request):
-        return request
+    async def format(self, response):
+        return response
 
 
 class JsonResponseFormatter(AbstractResponseFormatter):
 
-    async def format(self, request):
-        return await request.json()
+    async def format(self, response):
+        return await response.json()
 
 
 class JsonDecamelizeResponseFormatter(JsonResponseFormatter):
 
-    async def format(self, request):
-        return humps.decamelize(await super().format(request))
+    async def format(self, response):
+        return humps.decamelize(await super().format(response))
 
 
 class ContentResponseFormatter(AbstractResponseFormatter):
 
-    async def format(self, request):
-        return await request.read()
-
+    async def format(self, response):
+        return await response.read()

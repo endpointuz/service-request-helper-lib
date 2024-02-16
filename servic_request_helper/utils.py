@@ -25,6 +25,12 @@ class MethodWrapper:
     def post(self, uri, **kwargs):
         return self._request(uri, http_methods.POST, **kwargs)
 
+    def put(self, uri, **kwargs):
+        return self._request(uri, http_methods.PUT, **kwargs)
+
+    def patch(self, uri, **kwargs):
+        return self._request(uri, http_methods.PATCH, **kwargs)
+
     def delete(self, uri, **kwargs):
         return self._request(uri, http_methods.DELETE, **kwargs)
 
