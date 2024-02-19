@@ -1,14 +1,12 @@
 class ResponseFile:
     content = None
     filename = None
-    type = None
-    subtype = None
+    mimetype = None
 
-    def __init__(self, content, filename=None, type=None, subtype=None):
+    def __init__(self, content, filename=None, mimetype=None):
         self.content = content
         self.filename = filename
-        self.type = type
-        self.subtype = subtype
+        self.mimetype = mimetype
 
     @property
     def size_in_bytes(self):

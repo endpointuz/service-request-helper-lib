@@ -35,6 +35,6 @@ class FileResponseFormatter(AbstractResponseFormatter):
         headers = response.headers
 
         filename = get_filename_from_content_disposition_header(headers.get('Content-Disposition'))
-        type, subtype = parse_content_type_header(headers.get('Content-Type'))
+        mimetype = parse_content_type_header(headers.get('Content-Type'))
 
-        return ResponseFile(await response.read(), filename=filename, type=type, subtype=subtype)
+        return ResponseFile(await response.read(), filename=filename, mimetype=mimetype)
