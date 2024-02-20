@@ -1,3 +1,5 @@
+import re
+
 from servic_request_helper import http_methods
 
 
@@ -9,6 +11,22 @@ def build_url(host, uri):
         uri = uri[1:]
 
     return f'{host}/{uri}'
+
+
+def get_filename_from_content_disposition_header(header_value: str):
+    if not header_value:
+        return None
+
+    match = re.search(r'filename=([^\s]+)', header_value)
+    if match:
+        return match.group(1)
+
+
+def parse_content_type_header(header_value: str):
+    if not header_value:
+        return None
+
+    return header_value.split(';')[0].strip()
 
 
 class MethodWrapper:
