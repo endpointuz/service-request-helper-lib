@@ -73,8 +73,7 @@ class TestFileResponseFormatter(AbstractTestContentResponse):
 
         self.assertEqual(getattr(formatted_mock_response, 'content', None), b'testText')
         self.assertEqual(getattr(formatted_mock_response, 'filename', None), 'test.png')
-        self.assertEqual(getattr(formatted_mock_response, 'type', None), 'image')
-        self.assertEqual(getattr(formatted_mock_response, 'subtype', None), 'png')
+        self.assertEqual(getattr(formatted_mock_response, 'mimetype', None), 'image/png')
         self.assertEqual(getattr(formatted_mock_response, 'size_in_bytes', None), len(b'testText'))
 
         formatted_mock_response.save('./test_file_response_formatter.txt')
