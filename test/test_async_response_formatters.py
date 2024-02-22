@@ -11,7 +11,13 @@ class AbstractTestJsonResponse(unittest.IsolatedAsyncioTestCase):
      def get_formatted_mock_response(self, formatter):
          mock_response = Mock()
          mock_response.status_code = 200
-         mock_response.json = AsyncMock(return_value={'testField': 'testValue'})
+         mock_response.json = AsyncMock(return_value={
+             "testField": "testValue",
+             "nestedField": {
+                 "inner1": "inner_1",
+                 "innerTwo": "inner_two",
+             }
+         })
 
          return formatter.format(mock_response)
 
@@ -22,7 +28,15 @@ class TestFullResponseFormatter(AbstractTestJsonResponse):
         formatted_mock_response = await self.get_formatted_mock_response(formatters.FullResponseFormatter())
 
         self.assertEqual(formatted_mock_response.status_code, 200)
-        self.assertDictEqual(await formatted_mock_response.json(), {'testField': 'testValue'})
+        self.assertDictEqual(
+            await formatted_mock_response.json(),
+            {
+                "testField": "testValue",
+                "nestedField": {
+                    "inner1": "inner_1",
+                    "innerTwo": "inner_two",
+                }
+            })
 
 
 class TestJsonResponseFormatter(AbstractTestJsonResponse):
@@ -30,7 +44,15 @@ class TestJsonResponseFormatter(AbstractTestJsonResponse):
     async def test(self):
         formatted_mock_response = await self.get_formatted_mock_response(formatters.JsonResponseFormatter())
 
-        self.assertDictEqual(formatted_mock_response, {'testField': 'testValue'})
+        self.assertDictEqual(
+            formatted_mock_response,
+            {
+                "testField": "testValue",
+                "nestedField": {
+                    "inner1": "inner_1",
+                    "innerTwo": "inner_two",
+                }
+            })
 
 
 
@@ -39,7 +61,15 @@ class TestJsonDecamelizeResponseFormatter(AbstractTestJsonResponse):
     async def test(self):
         formatted_mock_response = await self.get_formatted_mock_response(formatters.JsonDecamelizeResponseFormatter())
 
-        self.assertDictEqual(formatted_mock_response, {'test_field': 'testValue'})
+        self.assertDictEqual(
+            formatted_mock_response,
+            {
+                "test_field": "testValue",
+                "nested_field": {
+                    "inner1": "inner_1",
+                    "inner_two": "inner_two",
+                }
+            })
 
 
 class AbstractTestContentResponse(unittest.IsolatedAsyncioTestCase):
