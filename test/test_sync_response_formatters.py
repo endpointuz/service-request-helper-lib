@@ -7,19 +7,21 @@ from servic_request_helper.types import ResponseFile
 
 
 class AbstractTestJsonResponse(unittest.TestCase):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
-     def get_formatted_mock_response(self, formatter):
-         mock_response = Mock()
-         mock_response.status_code = 200
-         mock_response.json = lambda: {
-             "testField": "testValue",
-             "nestedField": {
-                 "inner1": "inner_1",
-                 "innerTwo": "inner_two",
-             }
-         }
+        self.mock_response = Mock()
+        self.mock_response.status_code = 200
+        self.mock_response.json = lambda: {
+            "testField": "testValue",
+            "nestedField": {
+                "inner1": "inner_1",
+                "innerTwo": "inner_two",
+            }
+        }
 
-         return formatter.format(mock_response)
+    def get_formatted_mock_response(self, formatter):
+         return formatter.format(self.mock_response)
 
 
 class TestFullResponseFormatter(AbstractTestJsonResponse):
@@ -27,16 +29,7 @@ class TestFullResponseFormatter(AbstractTestJsonResponse):
     def test(self):
         formatted_mock_response = self.get_formatted_mock_response(formatters.FullResponseFormatter())
 
-        self.assertEqual(formatted_mock_response.status_code, 200)
-        self.assertDictEqual(
-            formatted_mock_response.json(),
-            {
-                "testField": "testValue",
-                "nestedField": {
-                    "inner1": "inner_1",
-                    "innerTwo": "inner_two",
-                }
-            })
+        self.assertEqual(self.mock_response.__hash__(), formatted_mock_response.__hash__())
 
 
 class TestJsonResponseFormatter(AbstractTestJsonResponse):
