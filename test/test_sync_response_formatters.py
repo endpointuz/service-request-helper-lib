@@ -29,7 +29,7 @@ class TestFullResponseFormatter(AbstractTestJsonResponse):
     def test(self):
         formatted_mock_response = self.get_formatted_mock_response(formatters.FullResponseFormatter())
 
-        self.assertEqual(self.mock_response.__hash__(), formatted_mock_response.__hash__())
+        self.assertIs(self.mock_response, formatted_mock_response)
 
 
 class TestJsonResponseFormatter(AbstractTestJsonResponse):
