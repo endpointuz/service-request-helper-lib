@@ -8,11 +8,11 @@ Installation
 =========
 Install locally via pip:
 ```commandline
-pip install "service-request-helper @ git+https://github.com/endpointuz/service-request-helper-lib.git"
+pip install service-request-helper[sync]
 ```
-In requirements.txt:
-```text
-service-request-helper @ git+https://github.com/endpointuz/service-request-helper-lib.git
+or
+```
+pip install service-request-helper[async]
 ```
 
 

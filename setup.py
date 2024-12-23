@@ -9,7 +9,7 @@ setup(
     version='1.0.0',
     name='service-request-helper',
     packages=find_packages(exclude='test'),
-    # url='https://github.com/ksinn/django-microservices-communication',
+    url='https://github.com/endpointuz/service-request-helper-lib',
     author='ksinn',
     author_email='ksinnd@gmail.com',
     description='Helper for client request to rest api',
