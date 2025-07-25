@@ -42,8 +42,8 @@ class RequestHelper:
 
         return headers
 
-    def request(self, uri, method, request_formatter=None, response_formatter=None, response_error_builder=None, params=None, json=None, data=None, files=None, headers=None, **kwargs):
-        url = utils.build_url(self.host, uri)
+    def request(self, uri, method, request_formatter=None, response_formatter=None, response_error_builder=None, params=None, json=None, data=None, files=None, headers=None, extra_host=None, **kwargs):
+        url = utils.build_url(extra_host or self.host, uri)
 
         _headers = self._build_headers(headers)
         _request_formatter = request_formatter or self.default_request_formatter
