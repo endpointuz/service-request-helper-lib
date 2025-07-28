@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
-    version='1.0.1',
+    version='1.0.2',
     name='service-request-helper',
     packages=find_packages(exclude='test'),
     url='https://github.com/endpointuz/service-request-helper-lib',
@@ -17,6 +17,7 @@ setup(
     long_description=long_description,
     install_requires=[
         'pyhumps',
+        'pytz',
     ],
     extras_require={
         "sync": [

@@ -1,3 +1,4 @@
+import pytz
 from datetime import datetime, timedelta
 
 from servic_request_helper import http_methods
@@ -69,4 +70,4 @@ class AuthByServiceHeaderManager(BaseAuthHeaderManager):
         if not self.access_expire_at_field:
             return False
 
-        return self.get_access_expire_at(auth) < (datetime.now() + timedelta(minutes=1))
+        return self.get_access_expire_at(auth) < (datetime.now(pytz.UTC) + timedelta(minutes=1))
